@@ -2,6 +2,7 @@ package dev.tildejustin.old_gamma;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.SimpleOption;
 
 import java.util.*;
@@ -10,16 +11,18 @@ import java.util.function.*;
 public enum DoubleSliderCallbacksGamma implements SimpleOption.SliderCallbacks<Double> {
     INSTANCE;
 
+    private final MinecraftClient client = MinecraftClient.getInstance();
+
     public Optional<Double> validate(Double d) {
         return d >= 0.0 && d <= 5.0 ? Optional.of(d) : Optional.empty();
     }
 
     public double toSliderProgress(Double d) {
-        return d / 5;
+        return client.world == null ? d / 5 : Math.min(d, 1);
     }
 
     public Double toValue(double d) {
-        return d * 5;
+        return client.world == null ? d * 5 : d;
     }
 
     @SuppressWarnings("unused")
