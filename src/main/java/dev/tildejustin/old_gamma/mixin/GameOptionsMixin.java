@@ -29,7 +29,7 @@ public abstract class GameOptionsMixin {
             ),
             index = 3
     )
-    private SimpleOption.Callbacks<?> replaceGammaOptionsVerifier(SimpleOption.Callbacks<?> original) {
+    private SimpleOption.Callbacks<?> replaceGammaSliderCallback(SimpleOption.Callbacks<?> original) {
         return DoubleSliderCallbacksGamma.INSTANCE;
     }
 

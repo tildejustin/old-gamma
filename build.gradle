@@ -13,7 +13,7 @@ base {
 repositories {
     maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
     maven { url "https://jitpack.io" }
-    // flatDir { dirs "libs" }
+    flatDir { dirs "libs" }
 }
 
 loom {
@@ -33,6 +33,8 @@ dependencies {
     mappings variantOf(libs.yarn.mappings) { classifier "v2" }
     modImplementation libs.fabric.loader
     vineflowerDecompilerClasspath libs.vineflower
+    //noinspection DependencyNotationArgument
+    modImplementation(name: "sodium-fabric-mc1.19.4-0.4.10+build.24")
 }
 
 processResources {
@@ -44,12 +46,12 @@ processResources {
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
     if (JavaVersion.current().isJava9Compatible()) {
-        it.options.release.set(8)
+        it.options.release.set(17)
     }
 }
 
 java {
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {

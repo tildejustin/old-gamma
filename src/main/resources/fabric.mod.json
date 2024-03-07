@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "old-gamma",
   "version": "${version}",
-  "name": "",
-  "description": "",
+  "name": "Gamma Modifier",
+  "description": "Increases gamma range to 0-5 when outside of a world",
   "authors": [
     "tildejustin"
   ],
@@ -18,7 +18,8 @@
     "old-gamma.mixins.json"
   ],
   "depends": {
-    "minecraft": "*",
-    "fabricloader": ">=0.15.0"
-  }
+    "minecraft": ">=1.19",
+    "fabricloader": ">=0.15"
+  },
+  "accessWidener": "old-gamma.accesswidener"
 }

@@ -1,11 +1,10 @@
 {
   "required": true,
   "package": "dev.tildejustin.old_gamma.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [
-  ],
+  "compatibilityLevel": "JAVA_17",
   "client": [
-    "GameOptionsMixin"
+    "GameOptionsMixin",
+    "SodiumGameOptionPagesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
