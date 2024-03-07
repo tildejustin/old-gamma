@@ -14,6 +14,35 @@ public abstract class GameOptionsMixin {
         return null;
     }
 
+    // 1.19-1.19.2
+    @SuppressWarnings({"UnresolvedMixinReference", "MixinAnnotationTarget", "InvalidInjectorMethodSignature"})
+    @Group(min = 1, max = 1)
+    @ModifyArg(
+            method = "<init>",
+            at = @At(
+                    value = "INVOKE",
+                    // class_7172 -> SimpleOption
+                    // class_7172$class_7307 -> SimpleOption$TooltipFactoryGetter
+                    // class_7172class_7303 -> SimpleOption$ValueTextGetter
+                    // class_7172$class_7178 -> SimpleOption$Callbacks
+                    target = "Lnet/minecraft/class_7172;<init>(Ljava/lang/String;Lnet/minecraft/class_7172$class_7307;Lnet/minecraft/class_7172$class_7303;Lnet/minecraft/class_7172$class_7178;Ljava/lang/Object;Ljava/util/function/Consumer;)V",
+                    ordinal = 0
+            ),
+            slice = @Slice(
+                    from = @At(
+                            value = "CONSTANT",
+                            args = "stringValue=options.gamma"
+                    )
+            ),
+            index = 3,
+            require = 0
+    )
+    private SimpleOption.Callbacks<?> replaceGammaSliderCallbackOld(SimpleOption.Callbacks<?> original) {
+        return DoubleSliderCallbacksGamma.INSTANCE;
+    }
+
+    // 1.19.3+
+    @Group
     @ModifyArg(
             method = "<init>",
             at = @At(
@@ -27,7 +56,8 @@ public abstract class GameOptionsMixin {
                             args = "stringValue=options.gamma"
                     )
             ),
-            index = 3
+            index = 3,
+            require = 0
     )
     private SimpleOption.Callbacks<?> replaceGammaSliderCallback(SimpleOption.Callbacks<?> original) {
         return DoubleSliderCallbacksGamma.INSTANCE;
