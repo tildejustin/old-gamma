@@ -1,10 +1,11 @@
 {
   "required": true,
-  "package": "dev.tildejustin.example.mixin",
+  "package": "dev.tildejustin.old_gamma.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
+    "GameOptionsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "old-gamma",
   "version": "${version}",
   "name": "",
   "description": "",
@@ -8,14 +8,14 @@
     "tildejustin"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/modid",
-    "sources": "https://github.com/tildejustin/modid",
-    "issues": "https://github.com/tildejustin/modid/issues"
+    "homepage": "https://modrinth.com/mod/old-gamma",
+    "sources": "https://github.com/tildejustin/old-gamma",
+    "issues": "https://github.com/tildejustin/old-gamma/issues"
   },
   "license": "MIT",
   "environment": "*",
   "mixins": [
-    "modid.mixins.json"
+    "old-gamma.mixins.json"
   ],
   "depends": {
     "minecraft": "*",
