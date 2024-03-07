@@ -18,8 +18,11 @@
     "old-gamma.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=1.19",
+    "minecraft": ">=1.19.3",
     "fabricloader": ">=0.15"
+  },
+  "breaks": {
+    "sodium": ">=0.6"
   },
   "accessWidener": "old-gamma.accesswidener"
 }
