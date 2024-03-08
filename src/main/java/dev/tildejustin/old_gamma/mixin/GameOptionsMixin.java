@@ -15,7 +15,7 @@ public abstract class GameOptionsMixin {
     }
 
     // 1.19-1.19.2
-    @SuppressWarnings({"UnresolvedMixinReference", "MixinAnnotationTarget", "InvalidInjectorMethodSignature"})
+    @SuppressWarnings({"InvalidInjectorMethodSignature", "MixinAnnotationTarget", "UnresolvedMixinReference"})
     @Group(min = 1, max = 1)
     @ModifyArg(
             method = "<init>",
@@ -26,6 +26,7 @@ public abstract class GameOptionsMixin {
                     // class_7172class_7303 -> SimpleOption$ValueTextGetter
                     // class_7172$class_7178 -> SimpleOption$Callbacks
                     target = "Lnet/minecraft/class_7172;<init>(Ljava/lang/String;Lnet/minecraft/class_7172$class_7307;Lnet/minecraft/class_7172$class_7303;Lnet/minecraft/class_7172$class_7178;Ljava/lang/Object;Ljava/util/function/Consumer;)V",
+                    remap = false,
                     ordinal = 0
             ),
             slice = @Slice(
