@@ -5,57 +5,31 @@ import com.mojang.serialization.Codec;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.SimpleOption;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Optional;
 
 public enum DoubleSliderCallbacksGamma implements SimpleOption.SliderCallbacks<Double> {
     INSTANCE;
 
-    private final MinecraftClient client = MinecraftClient.getInstance();
-
-    public Optional<Double> validate(Double d) {
-        return d >= 0.0 && d <= 5.0 ? Optional.of(d) : Optional.empty();
+    @Override
+    public Optional<Double> validate(Double value) {
+        return value >= 0.0 && value <= 5.0 ? Optional.of(value) : Optional.empty();
     }
 
-    public double toSliderProgress(Double d) {
-        return client.world == null ? d / 5 : Math.min(d, 1);
+    @Override
+    public double toSliderProgress(Double value) {
+        // when not in a world, value may be is 0 -> 5, and is scaled to 0 -> 1 on the slider
+        // when in a world, any value > 1 will be rendered at 1, otherwise the box renders without a slider
+        return MinecraftClient.getInstance().world == null ? value / 5 : Math.min(value, 1);
     }
 
-    public Double toValue(double d) {
-        return client.world == null ? d * 5 : d;
-    }
-
-    @SuppressWarnings("unused")
-    public <R> SimpleOption.SliderCallbacks<R> withModifier(
-            DoubleFunction<? extends R> sliderProgressValueToValue,
-            ToDoubleFunction<? super R> valueToSliderProgressValue
-    ) {
-        return new SimpleOption.SliderCallbacks<R>() {
-            @Override
-            public Optional<R> validate(R value) {
-                return DoubleSliderCallbacksGamma.this.validate(valueToSliderProgressValue.applyAsDouble(value)).map(sliderProgressValueToValue::apply);
-            }
-
-            @Override
-            public double toSliderProgress(R value) {
-                return DoubleSliderCallbacksGamma.this.toSliderProgress(valueToSliderProgressValue.applyAsDouble(value));
-            }
-
-            @Override
-            public R toValue(double sliderProgress) {
-                return sliderProgressValueToValue.apply(DoubleSliderCallbacksGamma.this.toValue(sliderProgress));
-            }
-
-            @Override
-            public Codec<R> codec() {
-                return DoubleSliderCallbacksGamma.this.codec().xmap(sliderProgressValueToValue::apply, valueToSliderProgressValue::applyAsDouble);
-            }
-        };
+    @Override
+    public Double toValue(double progress) {
+        // when not in a world, a slider progress is interpreted as being from 0 -> 5, when in a world it is the standard 0 -> 1
+        return MinecraftClient.getInstance().world == null ? progress * 5 : progress;
     }
 
     @Override
     public Codec<Double> codec() {
-        return Codec.either(Codec.doubleRange(0.0, 5.0), Codec.BOOL)
-                .xmap(either -> either.map(value -> value, value -> value ? 1.0 : 0.0), Either::left);
+        return Codec.either(Codec.doubleRange(0.0, 5.0), Codec.BOOL).xmap(either -> either.map(value -> value, value -> value ? 1.0 : 0.0), Either::left);
     }
 }

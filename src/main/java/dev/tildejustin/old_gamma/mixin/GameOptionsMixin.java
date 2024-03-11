@@ -25,16 +25,12 @@ public abstract class GameOptionsMixin {
                     // class_7172$class_7307 -> SimpleOption$TooltipFactoryGetter
                     // class_7172class_7303 -> SimpleOption$ValueTextGetter
                     // class_7172$class_7178 -> SimpleOption$Callbacks
+                    // can't do partial remapped signatures because we're not using the legacy Mixin AP
                     target = "Lnet/minecraft/class_7172;<init>(Ljava/lang/String;Lnet/minecraft/class_7172$class_7307;Lnet/minecraft/class_7172$class_7303;Lnet/minecraft/class_7172$class_7178;Ljava/lang/Object;Ljava/util/function/Consumer;)V",
                     remap = false,
                     ordinal = 0
             ),
-            slice = @Slice(
-                    from = @At(
-                            value = "CONSTANT",
-                            args = "stringValue=options.gamma"
-                    )
-            ),
+            slice = @Slice(from = @At(value = "CONSTANT", args = "stringValue=options.gamma")),
             index = 3,
             require = 0
     )
@@ -51,12 +47,7 @@ public abstract class GameOptionsMixin {
                     target = "Lnet/minecraft/client/option/SimpleOption;<init>(Ljava/lang/String;Lnet/minecraft/client/option/SimpleOption$TooltipFactory;Lnet/minecraft/client/option/SimpleOption$ValueTextGetter;Lnet/minecraft/client/option/SimpleOption$Callbacks;Ljava/lang/Object;Ljava/util/function/Consumer;)V",
                     ordinal = 0
             ),
-            slice = @Slice(
-                    from = @At(
-                            value = "CONSTANT",
-                            args = "stringValue=options.gamma"
-                    )
-            ),
+            slice = @Slice(from = @At(value = "CONSTANT", args = "stringValue=options.gamma")),
             index = 3,
             require = 0
     )
